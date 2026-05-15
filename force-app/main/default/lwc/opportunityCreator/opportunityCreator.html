@@ -1,0 +1,63 @@
+<template>
+
+    <section role="dialog"
+             tabindex="-1"
+             class="slds-modal slds-fade-in-open">
+
+        <div class="slds-modal__container">
+
+            <header class="slds-modal__header">
+                <h2 class="slds-text-heading_medium">
+                    New Opportunity - {recordTypeName}
+                </h2>
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium">
+
+                <lightning-record-edit-form
+                        object-api-name="Opportunity"
+                        record-type-id={recordTypeId}
+                        onsuccess={handleSuccess}
+                        onsubmit={handleSubmit}
+                        onerror={handleError}>
+
+                    <template for:each={processedFields} for:item="field">
+                        <lightning-input-field
+                                key={field.apiName}
+                                field-name={field.apiName}
+                                value={field.value}>
+                        </lightning-input-field>
+                    </template>
+
+                    <div class="slds-m-top_medium slds-text-align_right">
+
+                        <lightning-button
+                                label="Cancel"
+                                onclick={handleCancel}>
+                        </lightning-button>
+
+                        <lightning-button
+                                label="Save & New"
+                                class="slds-m-left_small"
+                                onclick={handleSaveAndNew}>
+                        </lightning-button>
+
+                        <lightning-button
+                                variant="brand"
+                                type="submit"
+                                label="Save"
+                                class="slds-m-left_small">
+                        </lightning-button>
+
+                    </div>
+
+                </lightning-record-edit-form>
+
+            </div>
+
+        </div>
+    </section>
+
+    <div class="slds-backdrop slds-backdrop_open"></div>
+
+</template>
